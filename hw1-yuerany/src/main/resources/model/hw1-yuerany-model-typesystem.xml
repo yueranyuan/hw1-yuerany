@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+    <name>hw1-yuerany-model-typesystem</name>
+    <description>Data used to model the components of the text that the program processes</description>
+    <version>1.0</version>
+    <vendor/>
+  <imports>
+    <import name="base.hw1-yuerany-base-typesystem"/>
+    <import name="nlp.hw1-yuerany-nlp-typesystem"/>
+  </imports>
+  <types>
+    <typeDescription>
+      <name>model.Sentence</name>
+      <description>A sentence and all its associated data.  This includes NLP data used to evaluate the sentence.
+ex: 'who shot Lincoln?', 'booth shot Lincoln.'</description>
+      <supertypeName>base.BaseAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>tokens</name>
+          <description>The tokens of the sentence delimited by spaces and punctuation.  The tokens should be produced by a tokenizer.
+ex: 'who shot Lincoln?' has the tokens 'who', 'shot', 'Lincoln'</description>
+          <rangeTypeName>nlp.token.TokenList</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>ngrams</name>
+          <description>The ngrams of the tokens of the sentence.  An ngram is a list of n tokens that appear sequentially in the sentence.  Ngrams can be unigrams (n = 1), bigrams (n = 2), trigrams (n = 3), or more (for larger n).
+ex: 'who shot Lincoln?' has three unigram 'who', 'shot', and lincoln', two bigrams 'who shot' and 'shot Lincoln', and a trigram 'who shot Lincoln'.</description>
+          <rangeTypeName>nlp.ngram.NgramList</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>model.Answer</name>
+      <description>An individual answer with its associated information including data used to analyse and evaluate the answer.  An answer must be an English sentence and must have a correctness value.
+ex: for the question "who shot Lincoln?"
+the answer "Booth shot Lincoln" and is correct.</description>
+      <supertypeName>model.Sentence</supertypeName>
+      <features>
+        <featureDescription>
+          <name>correct</name>
+          <description>Whether this answer is correct according to the Gold Standard.  1 is correct, 0 is incorrect</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>score</name>
+          <description>The score assigned by a scoring algorithm.  The scores must be between 0 and 1.  The closer the score is to 0 the more incorrect the system believes the answer is; the closer the score is to 1 the more correct the system believes the answer is.</description>
+          <rangeTypeName>uima.cas.Float</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>rank</name>
+          <description>The rank assigned to the answer by the evaluator.  This data is used compute precision.  The rank must be unique for each answer in an AnswerList.  Ranks must be 1 or greater.  A lower rank implies the answer is more likely to be correct.</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>model.AnswerList</name>
+      <description>A list of answers to a question</description>
+      <supertypeName>uima.cas.TOP</supertypeName>
+      <features>
+        <featureDescription>
+          <name>answers</name>
+          <description>The list of answers for this AnswerList.  The rank assigned to each answer within the answer list must be unique and must be sequential starting at 1.</description>
+          <rangeTypeName>uima.cas.FSList</rangeTypeName>
+          <elementType>model.Answer</elementType>
+          <multipleReferencesAllowed>false</multipleReferencesAllowed>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>model.TestElement</name>
+      <description>An element to be evaluated by the program.  This element consists of a question and a list of possible answers.  The answers must be annotated with correctness.  This data should be derived from a text file containing this information.
+ex:
+question: 'who shot lincoln?'
+answer1: 'booth shot lincoln.'
+answer2: 'lincoln shot booth.'</description>
+      <supertypeName>base.BaseAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>question</name>
+          <description>The question of the TestElement.  The question must be one sentence and must be in English.  The question must end in a question mark.
+ex: 'who shot Lincoln?'</description>
+          <rangeTypeName>model.Question</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>answers</name>
+          <description>A list of possible answers to be evaluated for the question of the TestElement.</description>
+          <rangeTypeName>model.AnswerList</rangeTypeName>
+        </featureDescription>
+      <featureDescription>
+          <name>precision</name>
+          <description>The overall metric with which we evaluate our system's performance on this test element.  The precision metric is a float between 0 and 1 and represents the percentage of the top N answers as ranked by our system that are actually correct.  (N being the number of actually correct answers in total).</description>
+          <rangeTypeName>uima.cas.Float</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>model.Question</name>
+      <description>A question to be evaluated.  The question must be one sentence and must be in English.  The question must end in a question mark.
+ex: 'who shot Lincoln?'</description>
+      <supertypeName>model.Sentence</supertypeName>
+    </typeDescription>
+  </types>
+</typeSystemDescription>

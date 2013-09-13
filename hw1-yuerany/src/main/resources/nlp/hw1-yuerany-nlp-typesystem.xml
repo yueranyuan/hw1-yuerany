@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+    <name>hw1-yuerany-nlp-typesystem</name>
+    <description>An NLP package consisting of data used by the tokenizer, annotator, and pos tagger.</description>
+    <version>1.0</version>
+    <vendor/>
+  <imports>
+    <import name="nlp.ngram.hw1-yuerany-nlp-ngram-typesystem"/>
+    <import name="nlp.pos.hw1-yuerany-nlp-pos-typesystem"/>
+    <import name="nlp.token.hw1-yuerany-nlp-token-typesystem"/>
+  </imports>
+</typeSystemDescription>

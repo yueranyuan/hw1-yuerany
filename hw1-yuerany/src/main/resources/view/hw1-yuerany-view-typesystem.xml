@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+    <name>hw1-yuerany-view-typesystem</name>
+    <description>This is the interface with the evaluation program with its input and outputs.  This is called view because the word 'interface' is reserved and in a MVC framework, the view has the closest semantics to an interface.</description>
+    <version>1.0</version>
+    <vendor/>
+  <types>
+    <typeDescription>
+      <name>view.Input</name>
+      <description>The input for the evaluator program.  This contains the location of the file with the question and answers.
+The file must be of the format:
+Q &lt;question&gt;
+A &lt;correctness&gt; &lt;answer&gt;
+...
+
+where &lt;correctness&gt; is 1 for correct and 0 for incorrect.</description>
+      <supertypeName>uima.cas.TOP</supertypeName>
+      <features>
+        <featureDescription>
+          <name>fileLocation</name>
+          <description>this is the file location of the file containing the question and answers to be evaluated.  This should be a valid file location.  The file must be of type .txt
+The file must be of the format:
+Q &lt;question&gt;
+A &lt;correctness&gt; &lt;answer&gt;
+...
+
+where &lt;correctness&gt; is 1 if the answer is correct and 0 if the answer is incorrect</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>view.Output</name>
+      <description>The output of the evaluator which is a single precision score.</description>
+      <supertypeName>uima.cas.TOP</supertypeName>
+      <features>
+        <featureDescription>
+          <name>precision</name>
+          <description>This score measures the precentage of the top N answers ranked by the program that were actually correct.  The precision should be a number between 0 and 1.</description>
+          <rangeTypeName>uima.cas.Float</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  <typeDescription>
+      <name>view.Description</name>
+      <description>The description for a particularly tagger or scorer that is being used.  The description contains unstructured information about which tagger to use and with what parameters.
+TODO: iterate on descriptions and perhaps refactor as necessary once taggers are developed.</description>
+      <supertypeName>uima.cas.TOP</supertypeName>
+      <features>
+        <featureDescription>
+          <name>name</name>
+          <description>The name of the tagger to use
+ex: 'stanford.nlp.tokenizer'</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>params</name>
+          <description>The list of parameters for initializing the tagger.  Because differing third party taggers will have different parameters, this field is left unstructured.</description>
+          <rangeTypeName>uima.cas.StringArray</rangeTypeName>
+          <multipleReferencesAllowed>true</multipleReferencesAllowed>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>view.ProgramDescription</name>
+      <description>The specifications for the taggers and scorers used by the program.  This is used to initialize the program.</description>
+      <supertypeName>uima.cas.TOP</supertypeName>
+      <features>
+        <featureDescription>
+          <name>tokenizerDescription</name>
+          <description>specifications for the tokenizer used in the pipeline</description>
+          <rangeTypeName>view.Description</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>posTaggerDescription</name>
+          <description>descriptions for the pos tagger used in the pipeline</description>
+          <rangeTypeName>view.Description</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>ngramTaggerDescription</name>
+          <description>description for the ngram tagger used in the pipeline</description>
+          <rangeTypeName>view.Description</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>scorerDescription</name>
+          <description>description for the scorer which computes scores for the various answers given the features computed in the pipeline.</description>
+          <rangeTypeName>view.Description</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>

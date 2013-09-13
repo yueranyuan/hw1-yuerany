@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+    <name>hw1-yuerany-nlp-ngram-typesystem</name>
+    <description>Data produced/used by the ngram tagger.  Ngrams consist of many tokens</description>
+    <version>1.0</version>
+    <vendor/>
+  <imports>
+    <import name="base.hw1-yuerany-base-typesystem"/>
+    <import name="nlp.token.hw1-yuerany-nlp-token-typesystem"/>
+  </imports>
+  <types>
+    <typeDescription>
+      <name>nlp.ngram.Ngram</name>
+      <description>A single ngram.  An ngram is a list of n consecutive tokens.  Ngrams can be bigrams, trigrams, or beyond.
+ex: bigram - 'hello world'
+trigram - 'got to go'
+5gram - 'the cat in the hat'</description>
+      <supertypeName>base.BaseAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>n</name>
+          <description>the number of tokens in this ngram</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>grams</name>
+          <description>the tokens in this ngram</description>
+          <rangeTypeName>nlp.token.TokenList</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>nlp.ngram.NgramList</name>
+      <description>A list of ngrams</description>
+      <supertypeName>uima.cas.TOP</supertypeName>
+      <features>
+        <featureDescription>
+          <name>ngrams</name>
+          <description>the ngrams in this NgramList</description>
+          <rangeTypeName>uima.cas.FSList</rangeTypeName>
+          <elementType>nlp.ngram.Ngram</elementType>
+          <multipleReferencesAllowed>false</multipleReferencesAllowed>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>

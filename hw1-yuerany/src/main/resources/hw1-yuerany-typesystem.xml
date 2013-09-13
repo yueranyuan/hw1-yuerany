@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+    <name>hw1-yuerany-typesystem</name>
+    <description>The typesystem for the test item evaluator.  The system specified takes in a formated text file of questions and answers and produces a precision score.  For more detail on how the precision score is computed, see the project writeup.
+
+ex:
+input text:
+'Q who shot lincoln?'
+'A 1 booth shot lincoln'
+'A 0 lincoln shot booth'
+output:
+1.0</description>
+    <version>1.0</version>
+    <vendor/>
+  <imports>
+    <import name="base.hw1-yuerany-base-typesystem"/>
+    <import name="nlp.hw1-yuerany-nlp-typesystem"/>
+    <import name="view.hw1-yuerany-view-typesystem"/>
+    <import name="model.hw1-yuerany-model-typesystem"/>
+  </imports>
+</typeSystemDescription>

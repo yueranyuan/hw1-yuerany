@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+    <name>hw1-yuerany-base-typesystem</name>
+    <description>basic elements that extend UIMA's data types to provide implementation independent abstract data types for use in other typesystems</description>
+    <version>1.0</version>
+    <vendor/>
+  <types>
+    <typeDescription>
+      <name>base.BaseAnnotation</name>
+      <description>Holds information about the annotator or other program which produced this annotation</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>source</name>
+          <description>The annotator which produced this annotation
+ex: 'stanford.nlp.tokenizer'</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>confidence</name>
+          <description>The confidence of this annotation.  Confidence is a number between 0 and 1 inclusive.  A gold annotator or file IO produce a confidence of 1.</description>
+          <rangeTypeName>uima.cas.Float</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>

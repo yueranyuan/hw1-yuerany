@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+    <name>hw1-yuerany-nlp-token-typesystem</name>
+    <description>Data used/produced by the tokenizer</description>
+    <version>1.0</version>
+    <vendor/>
+  <imports>
+    <import name="base.hw1-yuerany-base-typesystem"/>
+    <import name="nlp.pos.hw1-yuerany-nlp-pos-typesystem"/>
+  </imports>
+  <types>
+    <typeDescription>
+      <name>nlp.token.TokenList</name>
+      <description>A list of tokens
+ex: ['hello', 'world']</description>
+      <supertypeName>uima.cas.TOP</supertypeName>
+      <features>
+        <featureDescription>
+          <name>tokenList</name>
+          <description>The list of tokens contained in this TokenList</description>
+          <rangeTypeName>uima.cas.FSList</rangeTypeName>
+          <elementType>nlp.token.Token</elementType>
+          <multipleReferencesAllowed>true</multipleReferencesAllowed>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>nlp.token.Token</name>
+      <description>A single token produced from a sentence
+ex: 'hello', 'world'</description>
+      <supertypeName>base.BaseAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>pos</name>
+          <description>the Part of Speech tag of the token.
+ex: 'noun', 'verb'</description>
+          <rangeTypeName>nlp.pos.PosTag</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>

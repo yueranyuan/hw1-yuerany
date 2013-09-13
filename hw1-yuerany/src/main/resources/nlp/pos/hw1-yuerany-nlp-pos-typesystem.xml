@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+    <name>hw1-yuerany-nlp-pos-typesystem</name>
+    <description>Data produced/used by the part of speech tagger</description>
+    <version>1.0</version>
+    <vendor/>
+  <imports>
+    <import name="base.hw1-yuerany-base-typesystem"/>
+  </imports>
+  <types>
+    <typeDescription>
+      <name>nlp.pos.PosTag</name>
+      <description>A single part of speech tag produced by a part of speech tagger
+ex: 'noun', 'verb'</description>
+      <supertypeName>base.BaseAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>pos</name>
+          <description>The name of the part of speech of this POSTag</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>
